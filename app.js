@@ -138,20 +138,15 @@ Add a New Project
 promptUser()
   .then(promptProject)
   .then((portfolioData) => {
-    return generatePage(portfolioData);
-  })
-  .then((pageHTML) => {
-    return fs.writeFile(pageHTML);
-  })
-  .then((writeFileResponse) => {
-    console.log(writeFileResponse);
-    return fs.copyFile();
-  })
-  .then((copyFileResponse) => {
-    console.log(copyFileResponse);
-  })
-  .catch((err) => {
-    console.log(err);
+    const pageHTML = generatePage(portfolioData);
+
+    fs.writeFile("./index.html", pageHTML, (err) => {
+      if (err) throw new Error(err);
+
+      console.log(
+        "Page created! Check out index.html in this directory to see it!"
+      );
+    });
   });
 
 //  SAME AS ABOVE
